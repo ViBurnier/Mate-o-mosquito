@@ -1,24 +1,29 @@
-//criar a imagem da mosca, de tamanhos diferente, e em diferentes posicoes.
+//criar a imagem da mosca, de tamanhos difernente, e em diferentes posicoes.
 let body = document.querySelector('body')    
 
-function createImageFly(){
+let createImageFly = function(){
     let imageFly = document.createElement('img')
     imageFly.src = 'image/mosca.png'
+
+    //como mudar o tamanho da mosca sempre é necessários, o acoplamento seria aceitável aqui.
+    changeSizeImage(imageFly)
     return imageFly
 }
 
-function changeSizeFly(){
-    //numero aleatorios entre 60 100
-    let randomSize = Math.floor(Math.random() * (100 - 60) + 60)
 
-    //nao consigo mudar o style da imagefly pelo dom
-    //talvez criando pelo css e inserindo por classe de, mas quero que seja numero aleatorio
-    //por isso seria melhor alterar pelo dom
+function changeSizeImage(image){
+    //numero aleatorios entre 60 100 para o tamanho da image
+    let randomSize = Math.floor(Math.random() * (130 - 60) + 60)
     
-
+    image.style.width = randomSize + "px"
+    image.style.height = randomSize + "px"
+    
+    return image;
 }
+body.appendChild(createImageFly())
 
-changeSizeFly()
+
+
 
 //garantir que a mosca nao saia da tela
 
