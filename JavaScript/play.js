@@ -1,13 +1,32 @@
 //criar a imagem da mosca, de tamanhos difernente, e em diferentes posicoes.
 let body = document.querySelector('body')    
+const resolution = getResolutionUser()
+var life = 3;
 
-let createImageFly = function(){
-    let imageFly = document.createElement('img')
-    imageFly.src = 'image/mosca.png'
+function getResolutionUser(){ 
+    const height = window.innerHeight
+    const width = window.innerWidth
+
+    return [width, height]
+}
+
+function getRandomPositionResolution(resolution){
+    let X = Math.floor(Math.random() * resolution[0]) - 200  
+    let Y = Math.floor(Math.random() * resolution[1]) - 200
+    
+    posX = X < 0 ? 0 : X
+    posY = Y < 0 ? 0 : Y
+    
+    return [posX, posY]
+}
+
+let createImage = function(){
+    let image = document.createElement('img')
+    image.src = 'image/mosca.png'
 
     //como mudar o tamanho da mosca sempre é necessários, o acoplamento seria aceitável aqui.
-    changeSizeImage(imageFly)
-    return imageFly
+    changeSizeImage(image)
+    return image
 }
 
 
@@ -17,10 +36,31 @@ function changeSizeImage(image){
     
     image.style.width = randomSize + "px"
     image.style.height = randomSize + "px"
-    
-    return image;
 }
-body.appendChild(createImageFly())
+
+
+function changePlaceImage(image){
+    //pegar imagem , atualize o lugar da imagem
+    while(life > 0){
+        let position = getRandomPositionResolution(resolution)
+        image.style.left = position[0] 
+        image.style.top = position[1]
+        image.style.display = 'block'
+        image.style.background = 'red'
+        insertImageInScreen(image)
+        break;
+    }    
+
+}
+
+changePlaceImage(createImage())
+
+function insertImageInScreen(image){
+    body.appendChild(image)
+}
+
+//aparece(inserir a imagem no body no lugar atualizado) e suma(deletar a imagem do body).
+
 
 
 

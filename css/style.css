@@ -25,6 +25,7 @@ body{
 
 .timer{
     display: flex;
+   
     border-radius: 100px;
     padding: 8px;
     width: 160px;
@@ -68,4 +69,5 @@ body{
 
 .panel{
     display: inline-block;
+    background-color: red;
 }
