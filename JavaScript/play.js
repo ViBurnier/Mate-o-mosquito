@@ -25,13 +25,14 @@ let createImage = function(){
     image.src = 'image/mosca.png'
 
     //como mudar o tamanho da mosca sempre é necessários, o acoplamento seria aceitável aqui.
-    changeSizeImage(image)
+    //changeSizeImage(image)
+
     return image
 }
 
 
 function changeSizeImage(image){
-    //numero aleatorios entre 60 100 para o tamanho da image
+    //numero aleatorios entre 60 130 para o tamanho da image
     let randomSize = Math.floor(Math.random() * (130 - 60) + 60)
     
     image.style.width = randomSize + "px"
@@ -46,17 +47,15 @@ function changePlaceImage(image){
         image.style.left = position[0] 
         image.style.top = position[1]
         image.style.display = 'block'
-        image.style.background = 'red'
-        insertImageInScreen(image)
-        break;
+        
     }    
-
 }
 
-changePlaceImage(createImage())
+
 
 function insertImageInScreen(image){
-    body.appendChild(image)
+    //adicionei ao body a imagem
+    body.appendChild(changePlaceImage(image))
 }
 
 //aparece(inserir a imagem no body no lugar atualizado) e suma(deletar a imagem do body).
