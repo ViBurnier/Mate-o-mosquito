@@ -6,6 +6,8 @@ class ImageConstructor{
         this.image = this.createImage()
         this.changePlaceImage()
         this.insertImageInScreen()
+        this.changeSizeImage()
+        this.changeSideImage()
     }
     
     getRandomPositionResolution(){
@@ -21,7 +23,7 @@ class ImageConstructor{
     createImage(){
         let image = document.createElement('img')
         image.src = 'image/mosca.png'
-        image.style.position = 'absolute';
+        image.style.position = 'relative';
         return image
     }
     
@@ -38,9 +40,22 @@ class ImageConstructor{
     changePlaceImage(){
         //pegar imagem , atualize o lugar da imagem
             let position = this.getRandomPositionResolution(resolution)
-            this.image.style.left = position[0] 
-            this.image.style.top = position[1]
-           
+            this.image.style.left = position[0] + "px"
+            this.image.style.top = position[1] + "px"
+            
+           console.log(position)
+    }
+
+    changeSideImage(){
+        let randomSize = Math.floor(Math.random() * (1 - 3) + 3)
+
+        console.log(randomSize)
+        if(randomSize < 2){
+            this.image.style.transform = "scaleX(-1)"
+        }
+        else{
+            this.image.style.transform = "scaleX(1)"
+        }
     }
     
     insertImageInScreen(){
@@ -53,6 +68,8 @@ class ImageConstructor{
     }
 }
 
+
+let life = 3;
 let body = document.querySelector('body')    
 const resolution = [window.innerHeight, window.innerWidth]
 let image = new ImageConstructor(body, resolution);
@@ -60,22 +77,6 @@ let image = new ImageConstructor(body, resolution);
 image.image.onclick = () => {
     image.removeImage()
 }
-
-let life = 3;
-//aparece(inserir a imagem no body no lugar atualizado) e suma(deletar a imagem do body).
-
-
-
-
-
-//garantir que a mosca nao saia da tela
-
-//inserir a imagem da mosca na tela
-
-//conseguir clicar na mosca
-
-//se clicar: fazer a mosca sumir 
-
 //se nao clicar: perde vida
 
 //se perder as 3 vidas: perde o jogo
