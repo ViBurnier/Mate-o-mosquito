@@ -1,63 +1,67 @@
 //criar a imagem da mosca, de tamanhos difernente, e em diferentes posicoes.
-let body = document.querySelector('body')    
-const resolution = getResolutionUser()
-var life = 3;
-
-function getResolutionUser(){ 
-    const height = window.innerHeight
-    const width = window.innerWidth
-
-    return [width, height]
-}
-
-function getRandomPositionResolution(resolution){
-    let X = Math.floor(Math.random() * resolution[0]) - 200  
-    let Y = Math.floor(Math.random() * resolution[1]) - 200
+class ImageConstructor{
+    constructor(body, resolution){
+        this.body = body
+        this.resolution = resolution
+        this.image = this.createImage()
+        this.changePlaceImage()
+        this.insertImageInScreen()
+    }
     
-    posX = X < 0 ? 0 : X
-    posY = Y < 0 ? 0 : Y
-    
-    return [posX, posY]
-}
-
-let createImage = function(){
-    let image = document.createElement('img')
-    image.src = 'image/mosca.png'
-
-    //como mudar o tamanho da mosca sempre é necessários, o acoplamento seria aceitável aqui.
-    //changeSizeImage(image)
-
-    return image
-}
-
-
-function changeSizeImage(image){
-    //numero aleatorios entre 60 130 para o tamanho da image
-    let randomSize = Math.floor(Math.random() * (130 - 60) + 60)
-    
-    image.style.width = randomSize + "px"
-    image.style.height = randomSize + "px"
-}
-
-
-function changePlaceImage(image){
-    //pegar imagem , atualize o lugar da imagem
-    while(life > 0){
-        let position = getRandomPositionResolution(resolution)
-        image.style.left = position[0] 
-        image.style.top = position[1]
-        image.style.display = 'block'
+    getRandomPositionResolution(){
+        let X = Math.floor(Math.random() * this.resolution[0]) - 200  
+        let Y = Math.floor(Math.random() * this.resolution[1]) - 200
         
-    }    
+        let posX = X < 0 ? 0 : X
+        let posY = Y < 0 ? 0 : Y
+        
+        return [posX, posY]
+    }
+    
+    createImage(){
+        let image = document.createElement('img')
+        image.src = 'image/mosca.png'
+        image.style.position = 'absolute';
+        return image
+    }
+    
+    
+    changeSizeImage(){
+        //numero aleatorios entre 60 130 para o tamanho da image
+        let randomSize = Math.floor(Math.random() * (130 - 40) + 60)
+
+        this.image.style.width = randomSize + "px"
+        this.image.style.height = randomSize + "px"
+    }
+    
+    
+    changePlaceImage(){
+        //pegar imagem , atualize o lugar da imagem
+            let position = this.getRandomPositionResolution(resolution)
+            this.image.style.left = position[0] 
+            this.image.style.top = position[1]
+           
+    }
+    
+    insertImageInScreen(){
+        this.changePlaceImage()
+        this.body.appendChild(this.image)
+    }
+
+    removeImage(){
+        this.body.removeChild(this.image)
+    }
 }
 
+let body = document.querySelector('body')    
+const resolution = [window.innerHeight, window.innerWidth]
+let image = new ImageConstructor(body, resolution);
 
-
-function insertImageInScreen(image){
-    //adicionei ao body a imagem
-    body.appendChild(changePlaceImage(image))
+image.image.onclick = () => {
+    image.removeImage()
 }
 
+let life = 3;
 //aparece(inserir a imagem no body no lugar atualizado) e suma(deletar a imagem do body).
 
 
