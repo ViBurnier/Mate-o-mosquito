@@ -14,16 +14,22 @@ class ImageConstructor{
         let X = Math.floor(Math.random() * resolution[0]) - 200  
         let Y = Math.floor(Math.random() * resolution[1]) - 200
         
-        let posX = X < 0 ? 0 : X
-        let posY = Y < 0 ? 0 : Y
+        if(X < 0 || X >= resolution[0]){
+            X = 0
+        }
+
+        if(Y < 0 || Y >= resolution[1]){
+            Y = 0
+        }
         
-        return [posX, posY]
+        return [X, Y]
     }
     
     createImage(){
         let image = document.createElement('img')
         image.src = 'image/mosca.png'
         image.style.position = 'relative';
+        image.id = 'image'
         return image
     }
     
@@ -43,7 +49,6 @@ class ImageConstructor{
             this.image.style.left = position[0] + "px"
             this.image.style.top = position[1] + "px"
             
-           console.log(position)
     }
 
     changeSideImage(){
@@ -59,7 +64,6 @@ class ImageConstructor{
     }
     
     insertImageInScreen(){
-        
         this.body.appendChild(this.image)
     }
 
@@ -70,27 +74,37 @@ class ImageConstructor{
 
 let life = 3;
 let time = 30;
-const resolution = [window.innerHeight, window.innerWidth]
+const resolution = [window.innerWidth, window.innerHeight]
 let body = document.querySelector('body')  
 
 window.addEventListener('resize', resolution);
 
 let timerNumber = document.getElementById('timerNumber') 
 
-//mosca esta saindo da tela
 let image = new ImageConstructor(body, resolution);
 
 
+//fazer o tempo passar
+let stopwatch = setInterval(() => {
+    timerNumber.innerHTML = time
+    xImage()
+    time -= 1
+
+    if(time == 0){
+        time = 30
+    }
+}, 1000)
 
 image.image.onclick = () => {
     image.removeImage()
 }
-//fazer o tempo passar
-
-    // let stopwatch = setInterval(() => {
-    //     time -= 1
-    //     timerNumber.innerHTML = time
-    // }, 1000)
+//funcao que verifica se a mosca existe
+//  se existir: ele apaga perdendo vida
+function xImage(){
+    if(document.getElementById('image')){
+       image.removeImage()
+    }
+}
 
 //se nao clicar: perde vida
 
