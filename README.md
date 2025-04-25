@@ -15,6 +15,7 @@ Este projeto foi criado para praticar conceitos de programação front-end, mani
 
 - HTML5  
 - CSS3  
+- Bootstrap
 - JavaScript (ES6)
-
+- jQuery
 
