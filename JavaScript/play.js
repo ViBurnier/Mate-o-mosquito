@@ -11,8 +11,8 @@ class ImageConstructor{
     }
     
     getRandomPositionResolution(){
-        let X = Math.floor(Math.random() * this.resolution[0]) - 200  
-        let Y = Math.floor(Math.random() * this.resolution[1]) - 200
+        let X = Math.floor(Math.random() * resolution[0]) - 200  
+        let Y = Math.floor(Math.random() * resolution[1]) - 200
         
         let posX = X < 0 ? 0 : X
         let posY = Y < 0 ? 0 : Y
@@ -38,8 +38,8 @@ class ImageConstructor{
     
     
     changePlaceImage(){
-        //pegar imagem , atualize o lugar da imagem
-            let position = this.getRandomPositionResolution(resolution)
+        //atualize o lugar da imagem
+            let position = this.getRandomPositionResolution()
             this.image.style.left = position[0] + "px"
             this.image.style.top = position[1] + "px"
             
@@ -49,7 +49,7 @@ class ImageConstructor{
     changeSideImage(){
         let randomSize = Math.floor(Math.random() * (1 - 3) + 3)
 
-        console.log(randomSize)
+       
         if(randomSize < 2){
             this.image.style.transform = "scaleX(-1)"
         }
@@ -59,7 +59,7 @@ class ImageConstructor{
     }
     
     insertImageInScreen(){
-        this.changePlaceImage()
+        
         this.body.appendChild(this.image)
     }
 
@@ -68,19 +68,33 @@ class ImageConstructor{
     }
 }
 
-
 let life = 3;
-let body = document.querySelector('body')    
+let time = 30;
 const resolution = [window.innerHeight, window.innerWidth]
+let body = document.querySelector('body')  
+
+window.addEventListener('resize', resolution);
+
+let timerNumber = document.getElementById('timerNumber') 
+
+//mosca esta saindo da tela
 let image = new ImageConstructor(body, resolution);
+
+
 
 image.image.onclick = () => {
     image.removeImage()
 }
+//fazer o tempo passar
+
+    // let stopwatch = setInterval(() => {
+    //     time -= 1
+    //     timerNumber.innerHTML = time
+    // }, 1000)
+
 //se nao clicar: perde vida
 
 //se perder as 3 vidas: perde o jogo
 
-//fazer o tempo passar
 
 //se acabar o tempo: vitoria
