@@ -19,3 +19,7 @@ Este projeto foi criado para praticar conceitos de programação front-end, mani
 - JavaScript (ES6)
 - jQuery
 
+## 🧠 Arquitetura & Boas Práticas
+
+- Aplicação desenvolvida como uma **SPA (Single Page Application)**, garantindo uma experiência fluida sem recarregamento de página.
+- O código foi estruturado buscando seguir o **Princípio da Responsabilidade Única (SRP)**, mantendo separação clara entre estilos, lógica de negócio e estrutura da interface.
