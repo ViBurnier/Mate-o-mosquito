@@ -63,13 +63,28 @@ class ImageConstructor {
   }
 }
 
+function loseHeart(){
+  //muda a imagem do coracao cheio para vazio, e perde vida.
+  if (document.getElementById("image")) {
+    document.getElementById("h" + life).src = "image/coracao_vazio.png";
+    life--;
+  }
+}
+
+function changeScreen(){
+  //se a vida for igual a zero e direcionado para a tela de derrota
+  if (life == 0) {
+    window.location.href = "index.html?loser";
+  }
+}
+
 let life = 3;
 let time = 30;
 
 const storeDifficulty = localStorage.getItem('storeDifficulty')
 
-
 const resolution = [window.innerWidth, window.innerHeight];
+
 let body = document.querySelector("body");
 
 window.addEventListener("resize", resolution);
@@ -80,25 +95,17 @@ let timerNumber = document.getElementById("timerNumber");
 let image = new ImageConstructor(body, resolution);
 
 let stopwatch = setInterval(() => {
+
   timerNumber.innerHTML = time;
 
-  if (document.getElementById("image")) {
-    document.getElementById("h" + life).src = "image/coracao_vazio.png";
-    life--;
-  }
-
-  if (life == 0) {
-    window.location.href = "index.html?loser";
-  }
+  loseHeart()
+  
+  changeScreen()
 
   image.changePlaceImage();
   image.changeSizeImage();
   image.changeSideImage();
   image.insertImageInScreen();
-
-  if (time == 30) {
-    time = 30;
-  }
 
   time -= 1;
 }, storeDifficulty);
